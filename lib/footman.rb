@@ -7,7 +7,6 @@ class Footman < Unit
     # Also also give code outside this class access to these variables (via attr_reader, attr_writer or attr_accessor)
     @health_points = 60
     @attack_power = 10
-    @damage = 10
   end
 
 end

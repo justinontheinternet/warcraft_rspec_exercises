@@ -1,10 +1,13 @@
 class Barracks
 
-  attr_accessor :gold, :food
+  attr_accessor :gold, :food, :lumber
+  attr_reader :health_points
 
   def initialize
     @gold = 1000
     @food = 80
+    @health_points = 500
+    @lumber = 500
   end
 
   def can_train_footman?
@@ -32,6 +35,14 @@ class Barracks
       Peasant.new
     else
       puts "Not enough resources."
+    end
+  end
+
+  def damage(enemy)
+    if enemy.is_a? Footman
+      @health_points -= (enemy.attack_power / 2).ceil
+    elsif enemy.is_a? SiegeEngine
+      @health_points -= (enemy.attack_power * 2)
     end
   end
 
