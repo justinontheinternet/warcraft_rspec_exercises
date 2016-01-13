@@ -16,12 +16,6 @@ describe SiegeEngine do
     expect(@siege_engine.health_points).to eq(400)
   end
 
-  it "should cost the parent barracks 200 gold, 60 lumber, and 3 food to create" do
-    expect(@barrack.gold).to eq(800)
-    expect(@barrack.lumber).to eq(440)
-    expect(@barrack.food).to eq(77)
-  end
-
 
   describe "#attack!" do
     
@@ -43,6 +37,29 @@ describe SiegeEngine do
       @siege_engine.attack!(barrack)
       expect(barrack.health_points).to eq(400)
     end
+  end
+
+end
+
+
+
+describe Barracks do
+  
+  describe "#create_siege_engine" do
+    
+    it "should be able to create a new siege engine" do
+      barrack = Barracks.new
+      allow(barrack).to receive(:create_siege_engine).and_return(SiegeEngine)
+    end
+
+    it "should cost the barrack 200 gold, 60 lumber, and 3 food to create a siege engine" do
+    barrack = Barracks.new
+    engine = SiegeEngine.new(barrack)
+    expect(barrack.gold).to eq(800)
+    expect(barrack.lumber).to eq(440)
+    expect(barrack.food).to eq(77)
+  end
+
   end
 
 end

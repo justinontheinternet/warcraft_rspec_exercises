@@ -10,9 +10,6 @@ class Barracks
     @lumber = 500
   end
 
-  def can_train_footman?
-    food >= 2 && gold >= 135    #food is the method because inside an instance,
-  end                           #self = that particular instance. Same as calling self.food. This lets rspec access the info.
 
   def train_footman
     if self.can_train_footman?
@@ -22,10 +19,6 @@ class Barracks
     else
       puts "Not enough resources."
     end
-  end
-
-  def can_train_peasant?
-    gold >= 90 && food >= 5
   end
 
   def train_peasant
@@ -44,6 +37,20 @@ class Barracks
     elsif enemy.is_a? SiegeEngine
       @health_points -= (enemy.attack_power * 2)
     end
+  end
+
+  def create_siege_engine
+    SiegeEngine.new(self)
+  end
+
+  private
+
+  def can_train_footman?
+    food >= 2 && gold >= 135    #food is the method because inside an instance,
+  end                           #self = that particular instance. Same as calling self.food. This lets rspec access the info.
+
+  def can_train_peasant?
+    gold >= 90 && food >= 5
   end
 
 end
